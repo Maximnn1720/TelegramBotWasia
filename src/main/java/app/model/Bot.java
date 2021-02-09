@@ -56,10 +56,13 @@ public class Bot extends TelegramLongPollingBot {
     public String getBotUsername() {
         return _BotUsername;
     }
+
     private static String _BotUsername = "";
+
     public static void setBotUsername(String BotUsername) {
         _BotUsername = BotUsername;
     }
+
     /**
      * Метод возвращает token бота для связи с сервером Telegram
      *
@@ -69,7 +72,9 @@ public class Bot extends TelegramLongPollingBot {
     public String getBotToken() {
         return _BotToken;
     }
+
     private static String _BotToken = "";
+
     public static void setBotToken(String BotToken) {
         _BotToken = BotToken;
     }
@@ -111,7 +116,8 @@ public class Bot extends TelegramLongPollingBot {
             }
         }
     }
-    public static boolean IsBotIni(){
+
+    public static boolean IsBotIni() {
         return (instance != null);
     }
 }

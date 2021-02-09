@@ -4,32 +4,39 @@ public class User {
     private String name;
     private String password;
 
-    public User(){
+    public User() {
 
     }
-    public User(String name, String password){
+
+    public User(String name, String password) {
         this.name = name;
         this.password = password;
     }
-    public void SetName(String name){
+
+    public void SetName(String name) {
         this.name = name;
     }
-    public String GetName(){
+
+    public String GetName() {
         return this.name;
     }
-    public void SetPassword(String password){
+
+    public void SetPassword(String password) {
         this.password = password;
     }
-    public String GetPassword(String password){
+
+    public String GetPassword(String password) {
         return this.password;
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

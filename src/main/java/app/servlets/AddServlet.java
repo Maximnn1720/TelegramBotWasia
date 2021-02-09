@@ -10,10 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AddServlet extends HttpServlet
-{
+public class AddServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         //PrintWriter writer = resp.getWriter();
         //writer.println("Method GET from AddServlet");
@@ -23,7 +22,7 @@ public class AddServlet extends HttpServlet
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String name = req.getParameter("name");
         String password = req.getParameter("pass");
