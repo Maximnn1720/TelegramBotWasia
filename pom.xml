@@ -44,6 +44,12 @@
             <version>5.0.1</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambotsextensions</artifactId>
+            <version>5.0.1</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
