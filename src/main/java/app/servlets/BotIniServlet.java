@@ -1,7 +1,6 @@
 package app.servlets;
 
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +9,6 @@ import java.io.IOException;
 
 import static app.model.Bot.InitBot;
 import static app.model.Bot.IsBotIni;
-
 
 public class BotIniServlet extends HttpServlet {
     @Override
@@ -22,8 +20,8 @@ public class BotIniServlet extends HttpServlet {
         } catch (Exception e) {
         }
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
-        requestDispatcher.forward(req, resp);
+//        RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
+//        requestDispatcher.forward(req, resp);
     }
 }
 
