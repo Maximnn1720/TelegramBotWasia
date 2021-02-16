@@ -5,7 +5,9 @@ import app.Commands.HelpCommand;
 import lombok.extern.log4j.Log4j;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.api.methods.send.SendLocation;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
@@ -22,7 +24,7 @@ public class Bot extends TelegramLongPollingCommandBot {
      *
      * @param update Содержит сообщение от пользователя.
      */
-    //@Override
+//    @Override
 //    public void onUpdateReceived(Update update) {
 //        String message = update.getMessage().getText();
 //        sendMsg(update.getMessage().getChatId().toString(), message, update.getMessage().getMessageId());
@@ -34,10 +36,28 @@ public class Bot extends TelegramLongPollingCommandBot {
         if (message.intern() == "Maksik") {
             sendMsg(update.getMessage().getChatId().toString(), "Maks - C# master EEE! ", update.getMessage().getMessageId());
             log.debug("Maksik krut!");
-        } else {
+        } if(message.intern() == "gde") {
+            sendLoc(update.getMessage().getChatId().toString());
+            sendMsg(update.getMessage().getChatId().toString(), "Здеся!", update.getMessage().getMessageId());
+        }
+            else {
             sendMsg(update.getMessage().getChatId().toString(), message, update.getMessage().getMessageId());
             log.debug("Bot answered the message.");
+            System.out.println("MESSSSSAGE!");
+
         }
+
+        Message lat = update.getMessage();
+
+        Double latitude = lat.getLocation().getLatitude();
+        if (latitude != null) {
+            System.out.println("I've got Location!!!!");
+            message = "Latitude: " + latitude;
+            sendMsg(update.getMessage().getChatId().toString(), message, update.getMessage().getMessageId());
+
+        }
+
+
     }
 
     /**
@@ -59,6 +79,18 @@ public class Bot extends TelegramLongPollingCommandBot {
         } catch (TelegramApiException e) {
             e.printStackTrace();
             log.debug("Something goes wrongggggg.");
+        }
+    }
+
+    public synchronized void sendLoc(String chatId) {
+        SendLocation sendLocation = new SendLocation();
+        sendLocation.setLatitude(59.950157);
+        sendLocation.setLongitude(30.315352);
+        sendLocation.setChatId(chatId);
+        try {
+            execute(sendLocation);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
         }
     }
 
