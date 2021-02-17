@@ -7,7 +7,6 @@ import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingC
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendLocation;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
@@ -32,6 +31,16 @@ public class Bot extends TelegramLongPollingCommandBot {
     @Override
     public void processNonCommandUpdate(Update update) {
         String message = update.getMessage().getText();
+        Double latitude = update.getMessage().getLocation().getLatitude();
+        if (latitude != null) {
+            System.out.println("I've got Location!!!!");
+            message = "Latitude: " + latitude;
+            sendMsg(update.getMessage().getChatId().toString(), message, update.getMessage().getMessageId());
+
+        }
+
+
+
         log.debug("Bot received message.");
         if (message.intern() == "Maksik") {
             sendMsg(update.getMessage().getChatId().toString(), "Maks - C# master EEE! ", update.getMessage().getMessageId());
@@ -44,18 +53,8 @@ public class Bot extends TelegramLongPollingCommandBot {
             sendMsg(update.getMessage().getChatId().toString(), message, update.getMessage().getMessageId());
             log.debug("Bot answered the message.");
             System.out.println("MESSSSSAGE!");
-
         }
 
-        Message lat = update.getMessage();
-
-        Double latitude = lat.getLocation().getLatitude();
-        if (latitude != null) {
-            System.out.println("I've got Location!!!!");
-            message = "Latitude: " + latitude;
-            sendMsg(update.getMessage().getChatId().toString(), message, update.getMessage().getMessageId());
-
-        }
 
 
     }
