@@ -2,6 +2,7 @@ package app.model;
 
 
 import app.Commands.HelpCommand;
+import app.Utils.GeoLocation;
 import lombok.extern.log4j.Log4j;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
@@ -31,30 +32,29 @@ public class Bot extends TelegramLongPollingCommandBot {
     @Override
     public void processNonCommandUpdate(Update update) {
         String message = update.getMessage().getText();
-        Double latitude = update.getMessage().getLocation().getLatitude();
-        if (latitude != null) {
+
+        if (update.getMessage().hasLocation()) {
             System.out.println("I've got Location!!!!");
-            message = "Latitude: " + latitude;
+            Double petroLatitude = 59.950157;
+            Double petroLongitude = 30.315352;
+            Double userLatitude = update.getMessage().getLocation().getLatitude();
+            Double userLongitude = update.getMessage().getLocation().getLongitude();
+            message = GeoLocation.distanceCalculation(userLatitude,userLongitude, petroLatitude, petroLongitude);
             sendMsg(update.getMessage().getChatId().toString(), message, update.getMessage().getMessageId());
 
+        } else {
+            if (message.intern() == "Maksik") {
+                sendMsg(update.getMessage().getChatId().toString(), "Maks - C# master EEE! ", update.getMessage().getMessageId());
+                log.debug("Maksik krut!");
+            } else if (message.intern() == "gde") {
+                sendLoc(update.getMessage().getChatId().toString());
+                sendMsg(update.getMessage().getChatId().toString(), "Здеся!", update.getMessage().getMessageId());
+            } else {
+                sendMsg(update.getMessage().getChatId().toString(), message, update.getMessage().getMessageId());
+                log.debug("Bot answered the message.");
+                System.out.println("MESSSSSAGE!");
+            }
         }
-
-
-
-        log.debug("Bot received message.");
-        if (message.intern() == "Maksik") {
-            sendMsg(update.getMessage().getChatId().toString(), "Maks - C# master EEE! ", update.getMessage().getMessageId());
-            log.debug("Maksik krut!");
-        } if(message.intern() == "gde") {
-            sendLoc(update.getMessage().getChatId().toString());
-            sendMsg(update.getMessage().getChatId().toString(), "Здеся!", update.getMessage().getMessageId());
-        }
-            else {
-            sendMsg(update.getMessage().getChatId().toString(), message, update.getMessage().getMessageId());
-            log.debug("Bot answered the message.");
-            System.out.println("MESSSSSAGE!");
-        }
-
 
 
     }
