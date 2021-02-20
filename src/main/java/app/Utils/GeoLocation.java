@@ -82,5 +82,11 @@ public class GeoLocation {
         return distance;
     }
 
+    public static void nearestLocation (Map<String, Location> locationList) {
+
+
+
+    }
+
 
 }
